@@ -1,0 +1,17 @@
+# No tokens, per-device identity, customer material, local agent state, or release secrets.
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+*.jks
+*.mobileprovision
+.credentials/
+.syntheon-local/
+node_modules/
+dist/
+tmp/
+.DS_Store
+coverage/
