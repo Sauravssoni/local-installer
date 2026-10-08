@@ -28,7 +28,7 @@ test('Windows remains disabled until signed and verified',async()=>{
 
 test('public root contains only curated distribution files',async()=>{
   const allowed=new Set(['README.md','LICENSE','.gitignore','SECURITY.md','RELEASE_CONTRACT.md',
-    'install.sh','install.ps1','docs','tests']);
+    'install.sh','install.ps1','verify-release.mjs','docs','tests']);
   const files=await fs.readdir(dir);
   for(const file of files){
     if(file==='.git'||file==='.github')continue;
