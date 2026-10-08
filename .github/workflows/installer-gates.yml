@@ -1,0 +1,33 @@
+name: Public installer pre-release gates
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  bootstrap:
+    name: Ubuntu installer checks
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - name: Checkout reviewed distribution source
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - name: Validate bundled runtime requirements
+        run: |
+          set -euo pipefail
+          node --version
+          bash -n install.sh
+          node --test tests/*.test.mjs
+      - name: Verify no proprietary source directories were published
+        run: |
+          set -euo pipefail
+          test ! -d packages
+          test ! -d api
+          test ! -e .env
+          test ! -e .syntheon-local
